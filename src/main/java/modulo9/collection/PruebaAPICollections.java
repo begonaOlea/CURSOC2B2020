@@ -47,10 +47,31 @@ public class PruebaAPICollections {
         for(Alumno a: lista){
             System.out.println(a);
         }
-   
+        
+        //BUSQUEDAS BINARIAS
+        
+        // primero ordenar por dni 
+        Collections.sort(lista); // dni es del compareto
+        // buscar por dni
+        int  posicion =  Collections.binarySearch(
+                lista, 
+                new Alumno(213, "",  null));
+        
+        System.out.println(" posicion " + posicion);
+        
+        Alumno aEncontrado = lista.get(posicion);
+        System.out.println("Encontre " + aEncontrado);
+        
+        //BUSQUEDA POR CICLO Y DNI
+        Collections.sort(lista, new ComparadorAlumnoPorCicloDNI());
+        int posicion2 = Collections.binarySearch(
+                lista, 
+                new  Alumno(33, "", Ciclo.PRIMARIA ),
+               new ComparadorAlumnoPorCicloDNI() );
+        
+        System.out.println(" posicio " + posicion2);
+        
     }//fin main
-
-   
     
 }//fin clase
 
