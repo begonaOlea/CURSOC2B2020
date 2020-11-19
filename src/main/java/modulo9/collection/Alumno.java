@@ -23,11 +23,17 @@ public class Alumno implements Comparable<Alumno> {
         return nombre;
     }
 
-    @Override
-    public String toString() {
-        return "Alumno{" + "dni=" + dni + ", nombre=" + nombre + '}';
+    public Ciclo getCiclo() {
+        return ciclo;
     }
 
+    @Override
+    public String toString() {
+        return "Alumno{" + "dni=" + dni + ", nombre=" + nombre + ", ciclo=" + ciclo + '}';
+    }
+    
+
+  
     @Override
     public int hashCode() {
         int hash = 7;
