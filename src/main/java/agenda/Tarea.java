@@ -19,6 +19,15 @@ public class Tarea {
         this.fechaRealizacion = null;
     }
 
+    public Tarea(String descripcion) {
+        this.descripcion = descripcion;
+        this.prioridad = Prioridad.BAJA;
+        this.fechaCreacion = new Date(); //fecha sistema
+        this.fechaRealizacion = null;
+    }
+    
+    
+
     public String getDescripcion() {
         return descripcion;
     }
@@ -66,6 +75,11 @@ public class Tarea {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Tarea{" + "fechaCreacion=" + fechaCreacion + ", prioridad=" + prioridad + ", descripcion=" + descripcion + ", fechaRealizacion=" + fechaRealizacion + '}';
     }
 
     

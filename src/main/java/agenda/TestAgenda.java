@@ -1,5 +1,8 @@
 package agenda;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class TestAgenda {
     
     public static void main(String[] args) {
@@ -8,7 +11,7 @@ public class TestAgenda {
         
         Tarea t1 = new Tarea(Prioridad.ALTA,"Diseñar Base de Datos");
         Tarea t2 = new Tarea(Prioridad.MEDIA,"Refactorizar listados"); 
-        Tarea t3 = new Tarea(Prioridad.MEDIA,"Generar informes "); 
+        Tarea t3 = new Tarea(Prioridad.MEDIA,"Generar informes"); 
         
         //añadir 3 tareas
         agenda.addTareaToDo(t1);
@@ -23,6 +26,15 @@ public class TestAgenda {
         
         agenda.mostrarListaToDo();
         agenda.mostrarListaDone();
+        
+        
+        try {
+            Tarea encontrada = agenda.buscarTareaToDoPorDescripcion("Generar informes");
+            System.out.println("TArea encontrada " + encontrada);
+        } catch (AgendaException ex) {
+            
+            System.out.println(ex.getMessage());
+        }
         
     }
     

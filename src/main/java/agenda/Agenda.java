@@ -2,6 +2,8 @@
 package agenda;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -58,5 +60,24 @@ public class Agenda {
     private String fechaFormateada(Date d){
         DateFormat df = DateFormat.getDateTimeInstance();
         return df.format(d);
+    }
+    
+    
+    public Tarea buscarTareaToDoPorDescripcion(String descripcion) throws AgendaException{
+        ArrayList<Tarea> listaBusqueda = new ArrayList<Tarea>();
+        listaBusqueda.addAll(toDoList);
+//        for(Tarea ta: listaBusqueda){
+//            System.out.println(ta);
+//        }
+         Collections.sort(listaBusqueda, new ComparadorAgendaPorDescripcion());
+         int posicion = Collections.binarySearch(listaBusqueda,
+                 new Tarea(descripcion),
+                 new ComparadorAgendaPorDescripcion());
+         if(posicion < 0 ){
+             throw new AgendaException("No encontró una tarea en lista ToDo con la "
+                     + "descripción " + descripcion);
+         }else{
+             return listaBusqueda.get(posicion);
+         }
     }
 }
