@@ -1,9 +1,12 @@
 package modulo12;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Files;
 
 public class PruebaFicheros {
 
@@ -50,7 +53,25 @@ public class PruebaFicheros {
            if (fw != null) fw.close();
            if (out != null) out.close();
         }
-
+        
+        
+        // LEER FICHERO
+        System.out.println(".... leyendo ......");
+        FileReader fr = null;
+        try{
+           fr = new FileReader(fichero);
+            BufferedReader br = new BufferedReader(fr);
+            String linea = br.readLine();
+            while(linea != null){
+                 System.out.println(linea);
+                  linea = br.readLine();
+            }//fin fichero
+        }catch(IOException e){
+            System.out.println("No pudo leer " + e.getMessage());
+        }finally{
+            if (fr != null ) fr.close();
+        } 
+        
     }//fin main 
 
 }
