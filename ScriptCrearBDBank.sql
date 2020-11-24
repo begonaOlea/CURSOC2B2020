@@ -45,11 +45,16 @@ SELECT * FROM BANCOS;
 
 -- Clientes
 
+INSERT INTO CLIENTES(
+VALUE (1, 'Laura', 'Blanco', '1985-02-23');
+
 INSERT INTO CLIENTES
 VALUES (2, 'Antonio','Robles',CURRENT_DATE,1);
 
 INSERT INTO CLIENTES(ID_CLIENTE, NOMBRE, APELLIDOS, ID_BANCO)
 VALUES (3, 'Mario','Cortina',1);
+
+
 
 
 select * from clientes;
