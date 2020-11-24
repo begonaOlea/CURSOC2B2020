@@ -214,11 +214,51 @@ HAVING SUM(CB.SALDO) > 15000;
 -- Ejercicios
 
 
--- Mostrar  informes banco
+-- Mostrar  informes banco. Consultas 
 --1   Total bancos   
 --2   Total saldo por clientes (id, nombre, apellido) y banco (nombre)
 --3   insertar un nuevo banco 3 con nombre 'Banco BBB'
 --4   Mostrar bancos que no tienen clientes
---5   Mostrar los clientes que han nacido entre el año 1990 y 2000 
+--5   Mostrar los clientes que han nacido entre el año 1980 y 2000 
 
 
+-- 1
+select count(*) total_bancos from bancos;
+
+-- 2
+select C.ID_CLIENTE, C.NOMBRE, C.APELLIDOS, B.NOMBRE AS BANCO, SUM(CB.SALDO) AS TOTAL_SALDO
+FROM BANCOS B, CLIENTES C , CUENTAS_BANCARIAS CB
+WHERE B.ID_BANCO = C.ID_BANCO AND C.ID_CLIENTE = CB.ID_CLIENTE
+GROUP BY C.ID_CLIENTE, C.NOMBRE, C.APELLIDOS, B.NOMBRE;
+
+/*
+
+A   B   C   D
+aa  1   30  40
+bb  1   44  40
+bb  2   44  55
+bb  2   56  75
+
+SELECT  B, SUM(D), SUM(C)
+GROUP BY B 
+
+SELECT A, B, SUM(D)
+GROUP A, B
+*/
+
+-- 3
+INSERT INTO BANCOS VALUES (3,'Banco BB');
+
+-- 4
+select * 
+from bancos 
+where id_banco not in (
+    select DISTINCT b.ID_BANCO
+    from  BANCOS b, CLIENTES c
+    where b.ID_BANCO = c.ID_BANCO);
+
+
+--5 
+SELECT NOMBRE, APELLIDOS, FECHA_NACIMIENTO
+FROM CLIENTES
+WHERE FECHA_NACIMIENTO BETWEEN '1980-01-01' AND '1999-12-31';
