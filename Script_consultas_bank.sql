@@ -1,0 +1,12 @@
+
+-- consulta a dos tablas
+-- Iban saldo y nombre apellidos del ciente de todas las cuentas
+
+SELECT CB.IBAN, CB.SALDO, C.NOMBRE, C.APELLIDOS
+FROM CUENTAS_BANCARIAS CB , CLIENTES  C
+WHERE CB.ID_CLIENTE = C.ID_CLIENTE;
+
+
+-- CAMBIO NOMBRE,APELLIDOS DEL CLIENTE ID 1
+SELECT *  FROM CLIENTES C WHERE C.ID_CLIENTE = 1;
+

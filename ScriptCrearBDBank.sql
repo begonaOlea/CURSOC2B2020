@@ -90,6 +90,3 @@ select * from cuentas_bancarias;
 
 --delete  from cuentas_bancarias;
 
-select cb.ID_CUENTA, cb.IBAN, cb.SALDO, c.NOMBRE, c.APELLIDOS
-from cuentas_bancarias cb , clientes c
-where cb.ID_CLIENTE = c.ID_CLIENTE;
