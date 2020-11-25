@@ -58,8 +58,8 @@ public class PruebaAPIJDBC {
                 + "('Colombian_Decaf', 101, 8.99, 0, 0), "
                 + "('French_Roast_Decaf', 49, 9.99, 0, 0)";
             
-            int filasInsertadas = sentencia.executeUpdate(poblarTabla);
-            System.out.printf("Ha insertado %d cafés.", filasInsertadas);
+         //   int filasInsertadas = sentencia.executeUpdate(poblarTabla);
+          //  System.out.printf("Ha insertado %d cafés.", filasInsertadas);
   
             //consultar los cafés de la tabla
             String consultaCafes = "SELECT * FROM COFFEES";
@@ -67,13 +67,17 @@ public class PruebaAPIJDBC {
             ResultSet resultado = sentencia.executeQuery(consultaCafes);
             //boolean hay = resultado.next(); 
             //if(hay){
-            while(resultado.next()){
-                System.out.printf("café %s del proveedor id %d ",
-                         resultado.getString(1), // columan 1
-                         resultado.getInt(2)     //columna 2
-                         );
+            while (resultado.next()) {
+                System.out.printf("café %-30s del proveedor id %6d a %10.2f€. Total Venta %d - %d ",
+                        resultado.getString(1), //  cof_name
+                        resultado.getInt(2), // sup_id
+                        resultado.getDouble(3), // price
+                        resultado.getInt("sales"),
+                        resultado.getInt("total")
+                );
+                System.out.println("");
             }//fin recorrer resultados
-           
+
            
         } catch (ClassNotFoundException e){
             System.out.println("Error carga Driver: " + e.getMessage() );
