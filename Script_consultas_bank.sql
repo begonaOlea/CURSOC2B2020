@@ -262,3 +262,71 @@ where id_banco not in (
 SELECT NOMBRE, APELLIDOS, FECHA_NACIMIENTO
 FROM CLIENTES
 WHERE FECHA_NACIMIENTO BETWEEN '1980-01-01' AND '1999-12-31';
+
+
+-- uso funciones de manejo de cadenas
+
+-- mostrar codigo y nombre de todos los bancos con nombre en mayúsculas
+
+select id_banco, upper(nombre)
+from bancos;
+
+
+-- Dime los clientes que tiene  en su nombre es Ramos (ignore case)
+select id_cliente , nombre , apellidos
+from CLIENTES
+where upper(NOMBRE) like '%LAURA%';
+
+-- SUBSTR
+select NOMBRE ||  ' ' || APELLIDOS as NOMBRE_LARGO,
+       SUBSTR (NOMBRE ||  ' ' || APELLIDOS, 1, 4) AS NOMBRE_CORTO
+from CLIENTES;
+
+-- NÚMEROS
+
+-- ver que comisión cobramos a cada clientes si le aplicamos un 0.5% de su
+-- saldo bancario
+select NOMBRE ||  ' ' || APELLIDOS AS NOMBRE, IBAN, SALDO, SALDO * 0.5 / 100 AS COMISION
+from CUENTAS_BANCARIAS cb, CLIENTES C 
+WHERE cb.ID_CLIENTE = c.id_cliente;
+
+-- AÑO DE NACIMIENTO
+SELECT NOMBRE, APELLIDOS, FECHA_NACIMIENTO, YEAR(FECHA_NACIMIENTO)
+FROM CLIENTES;
+
+
+-- UNION
+-- UNION ALL
+
+--CONSULTA1 UNION CONSULTA2  
+--> resulta todos los registor de la consulta 1 y 2 no  duplicados
+
+--CONSULTA1 UNION ALL  CONSULTA2  
+--> resulta todos los registor de la consulta 1 y 2  CON  duplicados
+
+
+select * from bancos;
+select * from clientes;
+
+--bancos
+--1 Banco ZK
+--2 Banco AA
+--3 Banco BB
+
+select C.NOMBRE, C.ID_BANCO, B.NOMBRE
+from CLIENTES C INNER JOIN BANCOS B ON C.ID_BANCO = B.ID_BANCO;
+
+--  Alta dos cliente sin banco
+INSERT INTO CLIENTES (ID_CLIENTE, NOMBRE, APELLIDOS)
+VALUES (5, 'Mario','Casas'),
+       (6, 'Lorenzo', 'Lamas');
+
+select C.NOMBRE, C.ID_BANCO, B.NOMBRE
+from CLIENTES C LEFT JOIN BANCOS B ON C.ID_BANCO = B.ID_BANCO;
+
+
+
+select C.NOMBRE, C.ID_BANCO, B.NOMBRE
+from CLIENTES C RIGHT JOIN BANCOS B ON C.ID_BANCO = B.ID_BANCO;
+
+
