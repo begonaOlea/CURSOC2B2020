@@ -17,19 +17,39 @@ public class PruebaPool {
         try {
             int n = PoolConexiones.getNumeroMaxConexiones();
             System.out.printf(" Pool con un maximo de %d conexiones", n);
+            System.out.printf(" Total libres %d y total ocupadas %d %n",
+                     PoolConexiones.getTotalConexionesLibres(), 
+                     PoolConexiones.getTotalConexionesOcupadas());
+            
             //Solicito una conexion que me da de Pool de conexiones libres
-            Connection con = PoolConexiones.getConnection();
+            Connection con = PoolConexiones.getConexionLibre();
             System.out.println("Conexión " + con);
-        } //fin main
-        catch (SQLException ex) {
+            
+            
+            System.out.printf(" Total libres %d y total ocupadas %d %n ",
+                     PoolConexiones.getTotalConexionesLibres(), 
+                     PoolConexiones.getTotalConexionesOcupadas());
+            
+            Connection con2 = PoolConexiones.getConexionLibre();
+            System.out.println("Conexión " + con2);
+            
+            
+            System.out.printf(" Total libres %d y total ocupadas %d %n ",
+                     PoolConexiones.getTotalConexionesLibres(), 
+                     PoolConexiones.getTotalConexionesOcupadas());
+            
+            //liberar
+            System.out.println("libero con");
+            PoolConexiones.liberaConexion(con);
+            PoolConexiones.liberaConexion(con2);
+            
+             System.out.printf(" Total libres %d y total ocupadas %d %n ",
+                     PoolConexiones.getTotalConexionesLibres(), 
+                     PoolConexiones.getTotalConexionesOcupadas());
+       
+        }catch (Exception ex) {
             Logger.getLogger(PruebaPool.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        
-        
-        
-        
-        
+        } 
        
     }
 
