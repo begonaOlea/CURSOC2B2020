@@ -1,4 +1,3 @@
-
 package com.shop;
 
 import com.db.PoolConexiones;
@@ -25,7 +24,7 @@ public class InformesTiendaCafes {
                 Statement st = con.createStatement();
                 ResultSet rs = st.executeQuery(query);
                 while(rs.next()){
-                    System.out.printf(" Proveedor %d cafes %d",
+                    System.out.printf(" Proveedor %d cafes %d %n",
                             rs.getInt(1),
                             rs.getInt(2)
                     );
