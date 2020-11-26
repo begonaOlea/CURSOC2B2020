@@ -41,6 +41,9 @@ public class PoolConexiones {
             
             //cargar driver
             Class.forName(driverClass);
+            //iniciar pool
+            inicializarPool();
+            
         } catch(ClassNotFoundException ef){
             System.out.println("No pudo cargar el driver "+ ef.getMessage());
         }catch (Exception ex) {
@@ -48,6 +51,9 @@ public class PoolConexiones {
         }
     }//fin static
 
+    private PoolConexiones() {
+    } 
+    
     public static int getNumeroMaxConexiones() {
         return numeroMaxConexiones;
     }
@@ -79,12 +85,45 @@ public class PoolConexiones {
     }
     
     public static Connection getConexionLibre(){
+        Connection con = null;
+        if(conexionesLibres.size() == 0 ){
+            System.out.println("... No hay conexiones disponibles ");
+        }else{
+            con = conexionesLibres.getLast();
+            conexionesLibres.remove(con);
+            conexionesOcupadas.addLast(con);
+        }
         
-        return null;
+        return con;
     }
     
     public static void liberaConexion(Connection con){
+        conexionesOcupadas.remove(con);
+        conexionesLibres.addFirst(con);
+    }
+    
+    public static void cerrarPool(){
         
+        if(conexionesOcupadas.size() >0 ){
+            System.out.println("No se puede cerrar Pool . Hay conexiones ocupadas");
+        }else{
+            for(Connection c: conexionesLibres){
+                try {
+                    c.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(PoolConexiones.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        
+    }//fin cerrar
+    
+    public static int getTotalConexionesLibres(){
+        return conexionesLibres.size();
+    }
+    
+    public static int getTotalConexionesOcupadas(){
+        return conexionesOcupadas.size();
     }
 
 } //fin PoolConexiones
