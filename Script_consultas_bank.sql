@@ -305,6 +305,14 @@ FROM CLIENTES;
 --> resulta todos los registor de la consulta 1 y 2  CON  duplicados
 
 
+select ID_CLIENTE, NOMBRE 
+FROM CLIENTES WHERE ID_CLIENTE =3
+UNION ALL
+select ID_CLIENTE, NOMBRE 
+FROM CLIENTES WHERE ID_CLIENTE =3;
+
+
+
 select * from bancos;
 select * from clientes;
 
@@ -313,14 +321,24 @@ select * from clientes;
 --2 Banco AA
 --3 Banco BB
 
+
+
+select C.NOMBRE, C.ID_BANCO, B.NOMBRE
+from CLIENTES C, BANCOS B
+WHERE C.ID_BANCO = B.ID_BANCO;
+
 select C.NOMBRE, C.ID_BANCO, B.NOMBRE
 from CLIENTES C INNER JOIN BANCOS B ON C.ID_BANCO = B.ID_BANCO;
+
+
+
 
 --  Alta dos cliente sin banco
 INSERT INTO CLIENTES (ID_CLIENTE, NOMBRE, APELLIDOS)
 VALUES (5, 'Mario','Casas'),
        (6, 'Lorenzo', 'Lamas');
 
+-- Lista de cliente con nombre banco si lo tiene
 select C.NOMBRE, C.ID_BANCO, B.NOMBRE
 from CLIENTES C LEFT JOIN BANCOS B ON C.ID_BANCO = B.ID_BANCO;
 

@@ -10,9 +10,9 @@ public class PruebaGestionarTienda {
         GestionarCafes service = new GestionarCafes();
         try {
             service.modificarVentas("Colombian", 75);
-            
+          //  service.modificarVentas("a' or '1' = '1", 75);      
             service.modificarVentasPrepared("Espresso", 10);
-            
+            service.modificarVentasPrepared("a' or '1' == '1", 75);   
         } catch (Exception ex) {
             System.out.println(ex.getMessage()); 
         }
